@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#define MAX 10000001
+#define N 100000
+int prime[MAX];
+int main()
+{
+    int i,j, num= 0;
+    prime[num] =2;
+#pragma acc parallel for
+for(i=3; i<=N; i+=2)
+ {
+  for(j=3; j<=sqrt(i); j+=2)
+         if( i%j==0 ) 
+    break;
+       if( j>sqrt(i) )
+     prime[++num] = i;
+ }
+  printf("%d内共有%d个素数：\n",N,num+1);
+ return 0;
+}
